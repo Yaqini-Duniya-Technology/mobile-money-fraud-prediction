@@ -1,0 +1,2 @@
+# FraudGuard AI
+# Core package

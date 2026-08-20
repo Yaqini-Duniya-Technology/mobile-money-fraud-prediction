@@ -1,68 +1,62 @@
-# ===========================
-# Python
-# ===========================
-__pycache__/
-*.py[cod]
-*$py.class
+# ==============================================================================
+# PROJECT CONFIGURATION & SECRETS
+# ==============================================================================
+# Critical security: Never upload local configuration secrets
+.env
 
-# ===========================
-# Virtual Environment
-# ===========================
+# ==============================================================================
+# ENVIRONMENT & DEPENDENCIES
+# ==============================================================================
+# Python virtual environments
 venv/
 env/
 .venv/
 
-# ===========================
-# Jupyter Notebook
-# ===========================
-.ipynb_checkpoints/
+# Streamlit application configurations
+.streamlit/cache/
 
-# ===========================
-# IDE Files
-# ===========================
-.vscode/
-.idea/
+# ==============================================================================
+# DATASETS & DATABASE ARTIFACTS
+# ==============================================================================
+# SQLite data stores
+transactions.db
 
-# ===========================
-# Operating System Files
-# ===========================
-.DS_Store
-Thumbs.db
-
-# ===========================
-# Python Environment
-# ===========================
-.env
-
-# ===========================
-# Model Files & Saved Weights
-# ===========================
-*.pkl
-*.joblib
-
-# ===========================
-# Large Datasets
-# ===========================
+# Raw data & large tracking files
 *.csv
 paysim dataset.csv
 
-# ===========================
-# Logs
-# ===========================
+# ==============================================================================
+# MACHINE LEARNING MODELS & WEIGHTS
+# ==============================================================================
+# Pickled pipelines and model architecture configurations
+*.pkl
+*.joblib
+
+# ==============================================================================
+# PYTHON BUILD & RUNTIME ARTIFACTS
+# ==============================================================================
+# Compiled byte code and cache repositories
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Runtime logs
 *.log
 
-# ===========================
-# SQLite Database
-# ===========================
-transactions.db
-
-# ===========================
-# Streamlit Cache
-# ===========================
-.streamlit/cache/
-
-# ===========================
-# Temporary Files
-# ===========================
+# Temporary system workspace documents
 *.tmp
 *.temp
+
+# ==============================================================================
+# USER WORKSPACE & IDE META DATA
+# ==============================================================================
+# Jupyter Notebook session checkpoints
+.ipynb_checkpoints/
+
+# Development environments (VS Code & PyCharm)
+.vscode/
+.idea/
+
+# Local Operating System junk files (macOS & Windows)
+.DS_Store
+Thumbs.db
