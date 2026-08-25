@@ -6,7 +6,7 @@
 # ============================================================
 
 import hashlib
-
+import os
 import requests
 
 from core.config import (
@@ -20,7 +20,8 @@ from core.config import (
 # API CONFIGURATION
 # ============================================================
 
-API_URL = (
+API_URL = os.getenv(
+    "FRAUDGUARD_API_URL",
     f"http://{API_HOST}:{API_PORT}"
 ).rstrip("/")
 

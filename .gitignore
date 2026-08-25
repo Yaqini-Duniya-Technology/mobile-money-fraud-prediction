@@ -3,6 +3,8 @@
 # ==============================================================================
 # Critical security: Never upload local configuration secrets
 .env
+.env.*
+!.env.example
 
 # ==============================================================================
 # ENVIRONMENT & DEPENDENCIES
@@ -11,6 +13,7 @@
 venv/
 env/
 .venv/
+.venv312/
 
 # Streamlit application configurations
 .streamlit/cache/
@@ -60,3 +63,19 @@ __pycache__/
 # Local Operating System junk files (macOS & Windows)
 .DS_Store
 Thumbs.db
+
+
+# Docker/build diagnostics
+docker-build-error.txt
+docker-build.log
+
+# Accidental temporary files
+e down
+# Local Python 3.12 virtual environment
+.venv312/
+
+# Docker diagnostics
+docker-build-error.txt
+
+# Accidental temporary files
+e down

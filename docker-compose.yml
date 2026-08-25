@@ -1,7 +1,7 @@
 # ============================================================
 # FraudGuard AI
 # Docker Compose
-# Version 3.1.1
+# Version 3.3.2
 # ============================================================
 
 services:
@@ -13,9 +13,7 @@ services:
   fraudguard-api:
 
     build:
-
       context: .
-
       dockerfile: Dockerfile
 
     container_name: fraudguard-api
@@ -23,25 +21,19 @@ services:
     restart: unless-stopped
 
     env_file:
-
       - .env
 
     environment:
-
-      API_HOST: 0.0.0.0
-
-      API_PORT: 8001
+      API_HOST: "0.0.0.0"
+      API_PORT: "8001"
 
     ports:
-
       - "8001:8001"
 
     volumes:
-
       - fraudguard_database:/app/data
 
     healthcheck:
-
       test:
         [
           "CMD",
@@ -51,11 +43,8 @@ services:
         ]
 
       interval: 30s
-
       timeout: 10s
-
       retries: 3
-
       start_period: 20s
 
 
@@ -81,14 +70,15 @@ services:
       - .env
 
     environment:
-      API_HOST: fraudguard-api
-      API_PORT: 8001
+      API_HOST: "fraudguard-api"
+      API_PORT: "8001"
 
     ports:
       - "8501:8501"
 
     volumes:
       - fraudguard_database:/app/data
+
 
 # ============================================================
 # PERSISTENT STORAGE
@@ -97,3 +87,4 @@ services:
 volumes:
 
   fraudguard_database:
+    name: mobilemoneyfrauddetection_fraudguard_database

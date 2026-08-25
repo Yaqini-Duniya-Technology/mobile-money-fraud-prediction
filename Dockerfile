@@ -1,34 +1,22 @@
-# ============================================================
-# FraudGuard AI
-# FastAPI Production Container
-# ============================================================
+FROM python:3.12-slim
 
-FROM python:3.11-slim
-
-# Python configuration
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
+ENV PIP_DEFAULT_TIMEOUT=1200
 
-# Container working directory
 WORKDIR /app
 
-# System dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-    && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
 
-# Python dependencies
-COPY requirements.txt /app/requirements.txt
+RUN python -m pip install \
+    --no-cache-dir \
+    --retries 20 \
+    --timeout 1200 \
+    -r requirements.txt
 
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r /app/requirements.txt
+COPY . .
 
-# Application
-COPY . /app
-
-# FastAPI port
 EXPOSE 8001
 
-# Start FastAPI
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8001"]

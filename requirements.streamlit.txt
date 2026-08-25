@@ -1,0 +1,5 @@
+streamlit==1.62.0
+requests==2.34.0
+python-dotenv==1.2.1
+pandas==2.3.3
+bcrypt==5.0.0

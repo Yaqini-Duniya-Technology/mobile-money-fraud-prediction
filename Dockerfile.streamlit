@@ -1,34 +1,30 @@
-# ============================================================
-# FraudGuard AI
-# Streamlit Frontend Container
-# ============================================================
+FROM python:3.12-slim
 
-FROM python:3.11-slim
-
-# Python configuration
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
+ENV PIP_DEFAULT_TIMEOUT=1200
 
-# Working directory
 WORKDIR /app
 
-# System dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-    && rm -rf /var/lib/apt/lists/*
+COPY requirements.streamlit.txt .
 
-# Python dependencies
-COPY requirements.txt /app/requirements.txt
+RUN python -m pip install \
+    --no-cache-dir \
+    --retries 20 \
+    --timeout 1200 \
+    -r requirements.streamlit.txt
 
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r /app/requirements.txt
+# Streamlit application
+COPY app.py .
+COPY api_client.py .
+COPY alert_system.py .
+COPY database.py .
+COPY chatbot.py .
 
-# Application
-COPY . /app
+# Application core
+COPY core ./core
 
-# Streamlit port
 EXPOSE 8501
 
-# Start Streamlit
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]
