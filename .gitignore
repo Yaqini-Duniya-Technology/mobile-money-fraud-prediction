@@ -1,81 +1,97 @@
-# ==============================================================================
-# PROJECT CONFIGURATION & SECRETS
-# ==============================================================================
-# Critical security: Never upload local configuration secrets
-.env
-.env.*
-!.env.example
+# ============================================================
+# Python
+# ============================================================
 
-# ==============================================================================
-# ENVIRONMENT & DEPENDENCIES
-# ==============================================================================
-# Python virtual environments
-venv/
-env/
-.venv/
-.venv312/
-
-# Streamlit application configurations
-.streamlit/cache/
-
-# ==============================================================================
-# DATASETS & DATABASE ARTIFACTS
-# ==============================================================================
-# SQLite data stores
-transactions.db
-
-# Raw data & large tracking files
-*.csv
-paysim dataset.csv
-
-# ==============================================================================
-# MACHINE LEARNING MODELS & WEIGHTS
-# ==============================================================================
-# Pickled pipelines and model architecture configurations
-*.pkl
-*.joblib
-
-# ==============================================================================
-# PYTHON BUILD & RUNTIME ARTIFACTS
-# ==============================================================================
-# Compiled byte code and cache repositories
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Runtime logs
-*.log
+# ============================================================
+# Virtual Environment
+# ============================================================
 
-# Temporary system workspace documents
-*.tmp
-*.temp
+.venv312/
+.venv/
+venv/
+env/
+ENV/
 
-# ==============================================================================
-# USER WORKSPACE & IDE META DATA
-# ==============================================================================
-# Jupyter Notebook session checkpoints
+# ============================================================
+# Environment / Secrets
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+# ============================================================
+# SQLite / Local Database
+# ============================================================
+
+*.db
+*.sqlite
+*.sqlite3
+
+data/
+
+# ============================================================
+# Jupyter
+# ============================================================
+
 .ipynb_checkpoints/
 
-# Development environments (VS Code & PyCharm)
+# ============================================================
+# IDE / Editors
+# ============================================================
+
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Local Operating System junk files (macOS & Windows)
+# ============================================================
+# OS Files
+# ============================================================
+
 .DS_Store
 Thumbs.db
+desktop.ini
 
+# ============================================================
+# Logs
+# ============================================================
 
-# Docker/build diagnostics
+*.log
+logs/
+
+# ============================================================
+# Temporary / Generated Files
+# ============================================================
+
+*.tmp
+*.temp
+*.bak
+
+# ============================================================
+# Build / Distribution
+# ============================================================
+
+build/
+dist/
+*.egg-info/
+
+# ============================================================
+# Test / Coverage
+# ============================================================
+
+.pytest_cache/
+.coverage
+htmlcov/
 docker-build-error.txt
-docker-build.log
 
-# Accidental temporary files
-e down
-# Local Python 3.12 virtual environment
-.venv312/
+# ============================================================
+# Streamlit
+# ============================================================
 
-# Docker diagnostics
-docker-build-error.txt
-
-# Accidental temporary files
-e down
+.streamlit/secrets.toml
+paysim dataset.csv
