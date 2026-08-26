@@ -22,6 +22,28 @@ The project combines a supervised machine learning workflow with a FastAPI infer
 ### [💻 View Source Code](https://github.com/Inda-Obanyi/mobile-money-fraud-prediction)
 ---
 
+## 📸 Application Preview
+
+### 🔐 Authentication
+
+![FraudGuard AI Login](screenshots/login.png)
+
+### 🔍 Transaction Analysis
+
+![FraudGuard AI Transaction Analysis](screenshots/transaction-analysis.png)
+
+### 🚨 Fraud Detection Result
+
+![FraudGuard AI Fraud Detection](screenshots/fraud-result.png)
+
+### 📊 Fraud Monitoring Dashboard
+
+![FraudGuard AI Monitoring Dashboard](screenshots/monitoring-dashboard.png)
+
+### 🔐 Audit & Security Logs
+
+![FraudGuard AI Audit Logs](screenshots/audit-logs.png)
+
 ## 🎯 Problem
 
 The growth of mobile money and digital financial transactions creates a need for systems that can detect suspicious activity quickly and consistently.
