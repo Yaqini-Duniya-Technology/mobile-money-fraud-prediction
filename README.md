@@ -1,4 +1,3 @@
-````markdown
 # 🛡️ FraudGuard AI
 
 ## AI-Powered Mobile Money Fraud Detection & Monitoring Platform
@@ -13,14 +12,19 @@ The project combines a supervised machine learning workflow with a FastAPI infer
 [![XGBoost](https://img.shields.io/badge/XGBoost-ML-orange)](https://xgboost.readthedocs.io/)
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite)](https://www.sqlite.org/)
 
----
 
 ## 🚀 Live Demo
 
 ### [🌐 Launch FraudGuard AI](https://fraudguard-streamlit.onrender.com/)
 
 ### [💻 View Source Code](https://github.com/Inda-Obanyi/mobile-money-fraud-prediction)
----
+
+**Streamlit Demo:**
+https://fraudguard-streamlit.onrender.com/
+
+**GitHub Repository:**  
+https://github.com/Inda-Obanyi/mobile-money-fraud-prediction
+
 
 ## 📸 Application Preview
 
@@ -43,6 +47,7 @@ The project combines a supervised machine learning workflow with a FastAPI infer
 ### 🔐 Audit & Security Logs
 
 ![FraudGuard AI Audit Logs](screenshots/audit-logs.png)
+
 
 ## 🎯 Problem
 
