@@ -17,13 +17,9 @@ The project combines a supervised machine learning workflow with a FastAPI infer
 
 ## 🚀 Live Demo
 
-**Streamlit Demo:** `YOUR_STREAMLIT_APP_LINK_HERE`
+### [🌐 Launch FraudGuard AI](https://fraudguard-streamlit.onrender.com/)
 
-**GitHub Repository:**  
-https://github.com/Inda-Obanyi/mobile-money-fraud-prediction
-
-> The live demo requires the deployed API/inference configuration to be available. Local development uses FastAPI as the model-serving layer.
-
+### [💻 View Source Code](https://github.com/Inda-Obanyi/mobile-money-fraud-prediction)
 ---
 
 ## 🎯 Problem
