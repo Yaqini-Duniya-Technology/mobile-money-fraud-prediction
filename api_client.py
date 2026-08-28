@@ -227,6 +227,12 @@ def predict_transaction(
     # ========================================================
     # REQUEST
     # ========================================================
+    print("=== FraudGuard API DEBUG ===")
+print("API_URL:", API_URL)
+print("API_KEY_EXISTS:", bool(FRAUDGUARD_API_KEY))
+print("API_KEY_LENGTH:", len(FRAUDGUARD_API_KEY) if FRAUDGUARD_API_KEY else 0)
+print("API_KEY_FINGERPRINT:", get_client_key_fingerprint())
+print("============================")
 
     try:
 
