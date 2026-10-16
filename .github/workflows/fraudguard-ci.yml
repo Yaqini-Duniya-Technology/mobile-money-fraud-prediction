@@ -44,6 +44,6 @@ jobs:
         run: |
           python -m compileall -q training tests
 
-      - name: Run model-independent feature tests
+      - name: Run model-independent tests
         run: |
-          python -m unittest tests.test_features -v
+          python -m unittest tests.test_features tests.test_model_package -v
