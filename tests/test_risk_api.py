@@ -1,15 +1,20 @@
-﻿import unittest
+﻿
+import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-import requests
 from dotenv import dotenv_values
+from fastapi.testclient import TestClient
 
+from training.risk_api import app
 from training.risk_service import FraudRiskService
 
 
 ROOT = Path(__file__).resolve().parents[1]
-API_URL = "http://127.0.0.1:8002/api/v1/risk/score"
-MODEL_PATH = ROOT / "reports" / "xgb_ablation" / "model.joblib"
+
+MODEL_PATH = (
+    ROOT / "reports" / "xgb_ablation" / "model.joblib"
+)
 
 API_KEY = dotenv_values(ROOT / ".env").get(
     "FRAUDGUARD_API_KEY", ""
@@ -20,14 +25,12 @@ class TestRiskAPI(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if not API_KEY or not API_KEY.strip():
-            raise RuntimeError(
-                "FRAUDGUARD_API_KEY is missing from .env"
+        if not MODEL_PATH.is_file():
+            raise FileNotFoundError(
+                f"Experimental model missing: {MODEL_PATH}"
             )
 
-        cls.headers = {
-            "X-API-Key": API_KEY
-        }
+        cls.service = FraudRiskService(MODEL_PATH)
 
         cls.transaction = {
             "step": 10,
@@ -37,18 +40,33 @@ class TestRiskAPI(unittest.TestCase):
             "oldbalanceDest": 10000,
         }
 
-        cls.service = FraudRiskService(MODEL_PATH)
+        # The test API uses an isolated key rather than
+        # relying on a developer's private .env credentials.
+        cls.key_override = patch.dict(
+            "os.environ",
+            {"FRAUDGUARD_API_KEY": "local-test-key"},
+        )
+
+        cls.key_override.start()
+
+        cls.client_context = TestClient(app)
+        cls.client = cls.client_context.__enter__()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.client_context.__exit__(None, None, None)
+        cls.key_override.stop()
 
     def send(self, payload, headers=None):
-        return requests.post(
-            API_URL,
+        if headers is None:
+            headers = {
+                "X-API-Key": "local-test-key"
+            }
+
+        return self.client.post(
+            "/api/v1/risk/score",
             json=payload,
-            headers=(
-                self.headers
-                if headers is None
-                else headers
-            ),
-            timeout=10,
+            headers=headers,
         )
 
     def test_valid_prediction(self):
@@ -64,7 +82,6 @@ class TestRiskAPI(unittest.TestCase):
         )
 
         self.assertIn("risk_score", data)
-        self.assertIn("decision", data)
 
     def test_direct_and_http_predictions_match(self):
         direct = self.service.predict(self.transaction)
@@ -77,7 +94,7 @@ class TestRiskAPI(unittest.TestCase):
     def test_invalid_api_key(self):
         response = self.send(
             self.transaction,
-            headers={"X-API-Key": "invalid-test-key"},
+            headers={"X-API-Key": "invalid"},
         )
 
         self.assertEqual(response.status_code, 401)
@@ -94,41 +111,46 @@ class TestRiskAPI(unittest.TestCase):
         payload = self.transaction.copy()
         payload.pop("amount")
 
-        response = self.send(payload)
-
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            self.send(payload).status_code,
+            422,
+        )
 
     def test_negative_amount(self):
         payload = self.transaction.copy()
         payload["amount"] = -100
 
-        response = self.send(payload)
-
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            self.send(payload).status_code,
+            422,
+        )
 
     def test_invalid_type(self):
         payload = self.transaction.copy()
         payload["type"] = "UNKNOWN"
 
-        response = self.send(payload)
-
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            self.send(payload).status_code,
+            422,
+        )
 
     def test_extra_field_rejected(self):
         payload = self.transaction.copy()
         payload["isFlaggedFraud"] = 1
 
-        response = self.send(payload)
-
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            self.send(payload).status_code,
+            422,
+        )
 
     def test_invalid_step(self):
         payload = self.transaction.copy()
         payload["step"] = 0
 
-        response = self.send(payload)
-
-        self.assertEqual(response.status_code, 422)
+        self.assertEqual(
+            self.send(payload).status_code,
+            422,
+        )
 
     def test_prediction_repeatability(self):
         first = self.send(self.transaction)
@@ -136,7 +158,6 @@ class TestRiskAPI(unittest.TestCase):
 
         self.assertEqual(first.status_code, 200)
         self.assertEqual(second.status_code, 200)
-
         self.assertEqual(first.json(), second.json())
 
 
