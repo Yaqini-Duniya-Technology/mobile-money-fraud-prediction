@@ -657,3 +657,26 @@ into one integrated system for financial fraud detection.
 
 ```
 ```
+
+---
+
+## Engineering case study | Recruiter overview
+
+### FraudGuard AI
+
+**Status:** Functional MVP; ongoing validation
+
+**Why this project exists:** Support scalable, auditable mobile-money fraud triage.
+
+**Development process:** Data exploration → feature engineering → imbalance analysis → model comparison → temporal validation → XGBoost → FastAPI → Streamlit → authentication, persistence and audit logs.
+
+**Evidence and limitations:** Temporal test precision 93.15%, recall 72.26%, F1 81.39%; offline evaluation only.
+
+**Planned outcome:** Improve independent validation, monitoring, security and real-world readiness.
+
+**Engineering value:** Demonstrates problem definition, end-to-end implementation, critical evaluation, clear documentation and practical iteration.
+
+**[Live MVP / demo](https://fraudguard-streamlit.onrender.com/)** · **[Source code](https://github.com/Yaqini-Duniya-Technology/mobile-money-fraud-prediction)**
+
+**Developer:** Inda Obanyi · AI/ML Engineer & Software Developer · Founder, Yaqini & Duniya Technology  
+**[Portfolio](https://indaobanyi.vercel.app)** · **[LinkedIn](https://www.linkedin.com/in/inda-obanyi-8886553a6/)** · **[GitHub](https://github.com/Inda-Obanyi)**
