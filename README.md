@@ -1,5 +1,12 @@
 # 🛡️ FraudGuard AI
 
+## Architecture and engineering evidence
+
+- **[System architecture and validation boundaries](docs/ARCHITECTURE.md)** — Streamlit, FastAPI, XGBoost, SQLite and security responsibilities.
+- **[Local installation](#%EF%B8%8F-local-installation)** — documented development startup.
+- **[Model evaluation](#-model-development)** — experimental metrics; production validation remains outstanding.
+
+
 ## AI-Powered Mobile Money Fraud Detection & Monitoring Platform
 
 FraudGuard AI is an end-to-end machine learning and AI engineering platform designed to identify potentially fraudulent mobile money transactions and provide an operational interface for analyzing, monitoring, and reviewing transaction risk.
