@@ -1,0 +1,49 @@
+
+name: FraudGuard AI CI
+
+on:
+  push:
+    branches:
+      - main
+      - audit/ml-validation-and-testing
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  feature-tests:
+    name: Feature Engineering Tests
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.risk-api.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.risk-api.txt
+
+      - name: Check dependency consistency
+        run: python -m pip check
+
+      - name: Check Python syntax
+        run: |
+          python -m compileall -q training tests
+
+      - name: Run model-independent tests
+        run: |
+          python -m unittest tests.test_features tests.test_model_package tests.test_risk_api_contract -v
