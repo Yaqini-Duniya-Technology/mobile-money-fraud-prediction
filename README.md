@@ -1,5 +1,9 @@
 # 🛡️ FraudGuard AI
 
+[![FraudGuard AI CI](https://github.com/Yaqini-Duniya-Technology/mobile-money-fraud-prediction/actions/workflows/fraudguard-ci.yml/badge.svg?branch=main)](https://github.com/Yaqini-Duniya-Technology/mobile-money-fraud-prediction/actions/workflows/fraudguard-ci.yml)
+[![FraudGuard Python syntax](https://github.com/Yaqini-Duniya-Technology/mobile-money-fraud-prediction/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Yaqini-Duniya-Technology/mobile-money-fraud-prediction/actions/workflows/ci.yml)
+
+
 ## Architecture and engineering evidence
 
 - **[System architecture and validation boundaries](docs/ARCHITECTURE.md)** — Streamlit, FastAPI, XGBoost, SQLite and security responsibilities.
